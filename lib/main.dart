@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'front_door_widget.dart';
@@ -9,9 +11,10 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    log("1");
+    log(context.widget.toString());
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

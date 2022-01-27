@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+
+import 'index.dart';
 
 class FrontDoorWidget extends StatefulWidget {
   const FrontDoorWidget({Key? key}) : super(key: key);
@@ -15,9 +19,19 @@ class _FrontDoorWidgetState extends State<FrontDoorWidget> with TickerProviderSt
   // vsync: this는 TickerProviderStateMixin를 넣어주는 것을 의미한다. TickerProviderStateMixin는 타이머이며
   // 한마디로 타이머가 객체 생성 시점이 아닌 build시점까지 초기화되는 것을 기다려준다는 것으로 이해했다.
   late final AnimationController _controller = AnimationController(
-    duration: const Duration(milliseconds: 500),
+    duration: const Duration(milliseconds: 1000),
     vsync: this,
-  )..forward();
+  )..forward()
+  ..addStatusListener((status) {
+    if(status == AnimationStatus.completed){
+      Navigator.of(context).pop();
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const IndexWidget()
+        )
+      );
+    }
+  });
 
   late final Animation<double> _animation = CurvedAnimation(
     parent: _controller,
