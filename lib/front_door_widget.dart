@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 import 'index.dart';
@@ -16,10 +14,11 @@ class _FrontDoorWidgetState extends State<FrontDoorWidget> with TickerProviderSt
 
   // late : run lazily the first time the field is accessed
   // running time에 _controller가 사용되는 시점에 초기화가 된다는 것을 의미한다.
+  // context와 this는 선언부에서는 사용할 수가 없는데 (객체가 완성되어야 사용할 수 있기 때문에) late가 이를 가능하게 만들어준다.
   // vsync: this는 TickerProviderStateMixin를 넣어주는 것을 의미한다. TickerProviderStateMixin는 타이머이며
   // 한마디로 타이머가 객체 생성 시점이 아닌 build시점까지 초기화되는 것을 기다려준다는 것으로 이해했다.
   late final AnimationController _controller = AnimationController(
-    duration: const Duration(milliseconds: 1000),
+    duration: const Duration(milliseconds: 1500),
     vsync: this,
   )..forward()
   ..addStatusListener((status) {
